@@ -9,7 +9,7 @@ public class HttpRestController {
 
     @GetMapping("getStocks")
     public YahooDataPoint getStocks(){
-        return new YahooDataPoint("Field1","Field2","Field3");
+        return new YahooDataPoint("Field1",00.00,00.00);
     }
 
 }

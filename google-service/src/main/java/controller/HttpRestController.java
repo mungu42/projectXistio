@@ -10,7 +10,7 @@ public class HttpRestController {
 
     @GetMapping("getStocks")
     public GoogleDataPoint getStocks(){
-        return new GoogleDataPoint("Field1","Field2","Field3");
+        return new GoogleDataPoint("Field1",00.00,00.00);
     }
 
 }

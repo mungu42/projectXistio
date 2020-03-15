@@ -1,38 +1,36 @@
 package pojo;
 
-
-// Sample Data pojo
-
 public class YahooDataPoint {
-    private String field1,field2,field3;
+    private String symbol;
+    private Double open,close;
 
-    public YahooDataPoint(String field1, String field2, String field3) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
+    public YahooDataPoint(String symbol, Double open, Double close) {
+        this.symbol = symbol;
+        this.open = open;
+        this.close = close;
     }
 
-    public String getField1() {
-        return field1;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setField1(String field1) {
-        this.field1 = field1;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public String getField2() {
-        return field2;
+    public Double getOpen() {
+        return open;
     }
 
-    public void setField2(String field2) {
-        this.field2 = field2;
+    public void setOpen(Double open) {
+        this.open = open;
     }
 
-    public String getField3() {
-        return field3;
+    public Double getClose() {
+        return close;
     }
 
-    public void setField3(String field3) {
-        this.field3 = field3;
+    public void setClose(Double close) {
+        this.close = close;
     }
 }
