@@ -12,23 +12,25 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.io.IOException;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController("/")
 public class HttpRestController {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
+    private final static Logger LOG = Logger.getLogger(HttpRestController.class.getName());
     @GetMapping("getStocks")
-    public int getStocks(){
-        return 0;
+    public String getStocks() throws Exception {
+        return sendGet().orElseGet(() -> "");
     }
-    private void sendGet() throws Exception {
+    private Optional<String> sendGet() throws Exception {
+        LOG.info("Made Request to "+"8081");
 
-        HttpGet request = new HttpGet("http://localhost/:");
+        HttpGet request = new HttpGet("http://localhost:8081/getStocks");
 
         // add request headers
-        request.addHeader("custom-key", "mkyong");
-        request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
-
         try {
             CloseableHttpResponse response = httpClient.execute(request);
             // Get HttpResponse Status
@@ -41,7 +43,8 @@ public class HttpRestController {
             if (entity != null) {
                 // return it as a String
                 String result = EntityUtils.toString(entity);
-                System.out.println(result);
+                LOG.info(result);
+                return Optional.of(result);
             }
 
         } catch (IOException e) {
@@ -49,6 +52,7 @@ public class HttpRestController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return Optional.of(null);
 
     }
 
