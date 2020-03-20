@@ -1,10 +1,10 @@
 package pojo;
 
-public class GoogleDataPoint {
+public class ProxyDataPoint {
     private String symbol;
     private Double open,close;
 
-    public GoogleDataPoint(String symbol, Double open, Double close) {
+    public ProxyDataPoint(String symbol, Double open, Double close) {
         this.symbol = symbol;
         this.open = open;
         this.close = close;
