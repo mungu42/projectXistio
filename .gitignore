@@ -3,3 +3,4 @@
 /yahoo-service/target/
 /*.iml
 /**/*.iml
+/proxy-service/target/
