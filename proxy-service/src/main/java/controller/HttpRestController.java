@@ -31,7 +31,6 @@ public class HttpRestController {
         HttpGet request = new HttpGet("http://localhost:8081/getStocks");
 
         // add request headers
-        try {
             CloseableHttpResponse response = httpClient.execute(request);
             // Get HttpResponse Status
             System.out.println(response.getStatusLine().toString());
@@ -47,11 +46,7 @@ public class HttpRestController {
                 return Optional.of(result);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         return Optional.of(null);
 
     }
