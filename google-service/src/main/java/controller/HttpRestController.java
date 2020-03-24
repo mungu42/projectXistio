@@ -15,10 +15,6 @@ import java.io.InputStreamReader;
 @RestController("/")
 public class HttpRestController {
 
-	/*
-	 * @GetMapping("getStocks") public GoogleDataPoint getStocks(){ return new
-	 * GoogleDataPoint("Field1",00.00,00.00); }
-	 */
     private AlphaVantageApi alphaVantageApi =  new AlphaVantageApi();
     @GetMapping("getStocks")
     public JSONObject getJSON() throws IOException, ParseException {
