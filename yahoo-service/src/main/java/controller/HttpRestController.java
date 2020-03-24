@@ -38,7 +38,7 @@ public class HttpRestController {
         return jsonObject;
     }
     @GetMapping("getAllStocks")
-    public Map<String,JSONObject> getAllData() throws IOException, ParseException {
+    public Map getAllData() throws IOException, ParseException {
         return alphaVantageApi.getStoredSymbolResults();
     }
 

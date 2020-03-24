@@ -12,13 +12,13 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AlphaVantageApi {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final String API_KEY = "AZ35ESNS50ESUG75";
-    private static final String BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=" + API_KEY;
+    private static final String BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&interval=1min&symbol=%s&apikey=" + API_KEY;
 
     private static final String[] SYM_LIST = {"MSFT", "GOOG", "TM", "BAC", "VOD", "CSCO", "KO", "WFC", "UBS", "MTU"};
 
@@ -37,21 +37,34 @@ public class AlphaVantageApi {
         return entity;
 
 
-
     }
 
-    public Map<String, JSONObject> getStoredSymbolResults() throws IOException, ParseException {
+    public Map<String, Map<String,Object>> getStoredSymbolResults() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        Map<String,JSONObject> map =new HashMap<String,JSONObject>();
-        for(String sym:SYM_LIST){
-            HttpEntity entity =  getSymListData(sym);
-            JSONObject jsonObject = (JSONObject)jsonParser.parse(
+        Map<String, Map<String,Object>> map = new HashMap<String, Map<String,Object>>();
+        for (String sym : SYM_LIST) {
+            HttpEntity entity = getSymListData(sym);
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(
                     new InputStreamReader(entity.getContent(), "UTF-8"));
-            map.put(sym,jsonObject);
+
+            Map dateMap = (Map) jsonObject.get("Time Series (1min)");
+
+            if (dateMap != null) {
+                Set<Object> objectSet = dateMap.keySet();
+                List<Object> objectList = objectSet.stream().collect(Collectors.toList());
+                Map<String, Object> newData = new HashMap<>();
+                for (int i = objectList.size() - 3; i < objectList.size(); i++) {
+                    newData.put((String) objectList.get(i),dateMap.get(objectList.get(i)));
+                }
+                map.put(sym,newData);
+
+
+
+            }
+
 
         }
         return map;
-
 
 
     }
