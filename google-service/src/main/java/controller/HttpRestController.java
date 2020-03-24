@@ -45,8 +45,8 @@ public class HttpRestController {
 					// System.out.println(line);
 					int semiIndex = line.indexOf(":");
 					int index1 = line.indexOf("\"", semiIndex);
-					int index2 = line.lastIndexOf(" ");
-					date = line.substring(index1 + 1, index2);
+					//int index2 = line.lastIndexOf(" ");
+					date = line.substring(index1 + 1, index1+11);
 					// stock.setLastRefreshed(date);
 					// System.out.println(date);
 				}
