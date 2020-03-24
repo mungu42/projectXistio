@@ -1,7 +1,7 @@
 package controller;
 
+import alphavantage.AlphaVantageApi;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

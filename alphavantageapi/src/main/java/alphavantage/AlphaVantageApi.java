@@ -1,4 +1,4 @@
-package controller;
+package alphavantage;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -18,8 +18,6 @@ public class AlphaVantageApi {
     private static final String BASE_URL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=" + API_KEY;
 
     private static final String[] symList = {"MSFT", "GOOG", "TM", "BAC", "VOD", "CSCO", "KO", "WFC", "UBS", "MTU"};
-
-    private Map<String, Object> cache = new HashMap<>();
 
 
     public HttpEntity getSymListData(String symbol) throws IOException {
