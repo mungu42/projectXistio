@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 
 
 @RestController("/")
 public class HttpRestController {
 
-
     @Autowired
     private AlphaVantageApi alphaVantageApi;
-
 
     @GetMapping("getStocks/{symbol}")
     public JSONObject getDataforSymbol(@PathVariable String sym) throws IOException, ParseException {
@@ -36,7 +35,7 @@ public class HttpRestController {
     }
 
     @GetMapping("getAllStocks")
-    public Map getAllData() throws IOException, ParseException {
+    public List getAllData() throws IOException, ParseException {
         return alphaVantageApi.getStoredSymbolResults();
     }
 
