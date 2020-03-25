@@ -18,8 +18,10 @@ import java.util.Map;
 @RestController("/")
 public class HttpRestController {
 
+
     @Autowired
     private AlphaVantageApi alphaVantageApi;
+
 
     @GetMapping("getStocks/{symbol}")
     public JSONObject getDataforSymbol(@PathVariable String sym) throws IOException, ParseException {
