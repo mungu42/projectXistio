@@ -39,7 +39,7 @@ public class HttpRestController {
     }
     @GetMapping("getAllStocks")
     public Map getAllData() throws IOException, ParseException {
-        return alphaVantageApi.getStoredSymbolResults();
+        return (Map) alphaVantageApi.getStoredSymbolResults();
     }
 
 }
