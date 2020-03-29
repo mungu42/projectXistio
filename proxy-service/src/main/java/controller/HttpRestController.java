@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("http://localhost:4200")
@@ -20,14 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class HttpRestController {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
     private final static Logger LOG = Logger.getLogger(HttpRestController.class.getName());
-    @GetMapping("getStocks")
-    public JSONArray getStocks() throws Exception {
-    	return sendGet();
+    
+    @GetMapping("getStocks/{api_key}")
+    public JSONArray getStocks(@PathVariable(value="api_key") String api_key) throws Exception {
+    	return sendGet(api_key);
     }
-    private JSONArray sendGet() throws Exception {
+    
+    private JSONArray sendGet(String api_key) throws Exception {
         LOG.info("Made Request to "+"8081");
 
-        HttpGet request = new HttpGet("http://localhost:8081/getAllStocks");
+        HttpGet request = new HttpGet("http://localhost:8081/getAllStocks"+"/"+api_key);
 
         // add request headers
             CloseableHttpResponse response = httpClient.execute(request);
