@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
-
 @RestController("/")
 public class HttpRestController {
 
@@ -25,7 +24,7 @@ public class HttpRestController {
     @GetMapping("getStocks/{symbol}")
     public JSONObject getDataforSymbol(@PathVariable String sym) throws IOException, ParseException {
 
-        HttpEntity entity =  alphaVantageApi.getSymListData(sym);
+        HttpEntity entity =  alphaVantageApi.getSymListData(sym,"XNMS8GH3E7M4PRWD");
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject)jsonParser.parse(
@@ -34,9 +33,9 @@ public class HttpRestController {
         return jsonObject;
     }
 
-    @GetMapping("getAllStocks")
-    public List getAllData() throws IOException, ParseException {
-        return alphaVantageApi.getStoredSymbolResults();
+    @GetMapping("getAllStocks/{api_key}")
+    public List getAllData(@PathVariable("api_key") String api_key) throws IOException, ParseException {
+        return alphaVantageApi.getStoredSymbolResults(api_key);
     }
 
 }
