@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 
 
@@ -29,7 +30,7 @@ public class HttpRestController {
     @GetMapping("getStocks/{symbol}")
     public JSONObject getDataforSymbol(@PathVariable String sym) throws IOException, ParseException {
 
-        HttpEntity entity =  alphaVantageApi.getSymListData(sym);
+        HttpEntity entity =  alphaVantageApi.getSymListData(sym,"API_KEY");
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject)jsonParser.parse(
@@ -38,8 +39,8 @@ public class HttpRestController {
         return jsonObject;
     }
     @GetMapping("getAllStocks")
-    public Map getAllData() throws IOException, ParseException {
-        return (Map) alphaVantageApi.getStoredSymbolResults();
+    public List getAllData(@PathVariable("api_key") String api_key) throws IOException, ParseException {
+        return alphaVantageApi.getStoredSymbolResults(api_key);
     }
 
 }
