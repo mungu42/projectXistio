@@ -23,8 +23,8 @@ public class AlphaVantageApi {
     private static final String[] SYM_LIST = {"MSFT", "GOOG", "TM", "BAC", "VOD"};
 
 
-    public HttpEntity getSymListData(String symbol, String api_key) throws IOException {
-        HttpGet request = new HttpGet(String.format(BASE_URL+api_key, symbol));
+    public HttpEntity getSymListData(String symbol, String apiKey) throws IOException {
+        HttpGet request = new HttpGet(String.format(BASE_URL+apiKey, symbol));
         // add request headers
         CloseableHttpResponse response = httpClient.execute(request);
         // Get HttpResponse Status

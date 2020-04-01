@@ -27,10 +27,10 @@ public class HttpRestController {
     @Autowired
     private AlphaVantageApi alphaVantageApi;
 
-    @GetMapping("getStocks/{symbol}")
-    public JSONObject getDataforSymbol(@PathVariable String sym) throws IOException, ParseException {
+    @GetMapping("getStocks/{symbol}/{apiKey}")
+    public JSONObject getDataforSymbol(@PathVariable String symbol,@PathVariable String apiKey) throws IOException, ParseException {
 
-        HttpEntity entity =  alphaVantageApi.getSymListData(sym,"API_KEY");
+        HttpEntity entity =  alphaVantageApi.getSymListData(symbol,apiKey);
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject)jsonParser.parse(
@@ -38,9 +38,9 @@ public class HttpRestController {
 
         return jsonObject;
     }
-    @GetMapping("getAllStocks")
-    public List getAllData(@PathVariable("api_key") String api_key) throws IOException, ParseException {
-        return alphaVantageApi.getStoredSymbolResults(api_key);
+    @GetMapping("getAllStocks/{apiKey}")
+    public List<Map<String, String>> getAllData(@PathVariable String apiKey) throws IOException, ParseException {
+        return alphaVantageApi.getStoredSymbolResults(apiKey);
     }
 
 }
