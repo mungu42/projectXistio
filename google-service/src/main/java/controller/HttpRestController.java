@@ -33,8 +33,8 @@ public class HttpRestController {
         return jsonObject;
     }
 
-    @GetMapping("getAllStocks/{api_key}")
-    public List getAllData(@PathVariable("apiKey") String apiKey) throws IOException, ParseException {
+    @GetMapping("getAllStocks/{apiKey}")
+    public List getAllData(@PathVariable String apiKey) throws IOException, ParseException {
         return alphaVantageApi.getStoredSymbolResults(apiKey);
     }
 
