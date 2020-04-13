@@ -1,0 +1,52 @@
+##################################################################################################
+# Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: yahoo
+  labels:
+    app: yahoo-service
+    service: yahoo-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 9080
+      name: yahoo
+      targetPort: 9080
+  selector:
+    app: yahoo-service
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: yahoo-api
+  labels:
+    account: yahoo-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yahoo-service
+  labels:
+    app: yahoo-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yahoo-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: yahoo-service
+        version: v1
+    spec:
+      serviceAccountName: yahoo-service
+      containers:
+        - name: yahoo-service
+          image: ajprabhu627/yahoo-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9080
