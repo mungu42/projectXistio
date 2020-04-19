@@ -46,7 +46,7 @@ spec:
       serviceAccountName: yahoo-service
       containers:
         - name: yahoo-service
-          image: ajprabhu627/yahoo-service:latest
+          image: yahoo:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9080

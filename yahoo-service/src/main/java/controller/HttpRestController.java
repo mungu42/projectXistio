@@ -24,8 +24,7 @@ public class HttpRestController {
      * GoogleDataPoint("Field1",00.00,00.00); }
      */
 
-    @Autowired
-    private AlphaVantageApi alphaVantageApi;
+    private AlphaVantageApi alphaVantageApi = new AlphaVantageApi();
 
     @GetMapping("getStocks/{symbol}/{apiKey}")
     public JSONObject getDataforSymbol(@PathVariable String symbol,@PathVariable String apiKey) throws IOException, ParseException {
