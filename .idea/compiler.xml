@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="proxy-service" />
+        <module name="yahoo-service" />
+        <module name="ui-service" />
+        <module name="alphavantageapi" />
+        <module name="google-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="11">
+      <module name="alphavantageapi" target="8" />
+      <module name="google-service" target="1.8" />
+      <module name="istio-project" target="1.6" />
+      <module name="proxy-service" target="1.6" />
+      <module name="ui-service" target="1.6" />
+      <module name="yahoo-service" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
