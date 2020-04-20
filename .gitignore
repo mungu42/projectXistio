@@ -5,3 +5,7 @@
 /**/*.iml
 /proxy-service/target/
 /alphavantageapi/target/
+/proxy-service/target/
+/ui-service/target/
+/yahoo-service/target/
+/alphavantageapi/target/
