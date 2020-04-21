@@ -13,21 +13,27 @@ spec:
     hosts:
     - "*"
 ---
-#apiVersion: networking.istio.io/v1alpha3
-#kind: VirtualService
-#metadata:
-#  name: stockserver
-#spec:
-#  hosts:
-#  - "*"
-#  gateways:
-#  - stock-gateway
-#  http:
-#  - match:
-#    - uri:
-#        prefix: /api/v1/yahoo
-#    route:
-#    - destination:
-#        host: yahoo
-#        port:
-#          number: 8080
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: stockserver
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - stock-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /getAllStocks
+    route:
+    - destination:
+        host: yahoo
+        port:
+          number: 8080
+      weight: 50
+    - destination:
+        host: google
+        port:
+          number: 8081
+      weight: 50
