@@ -16,7 +16,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: stockserver
+  name: proxy-virtual
 spec:
   hosts:
   - "*"
@@ -24,16 +24,55 @@ spec:
   - stock-gateway
   http:
   - match:
-    - uri:
-        prefix: /getAllStocks
+    - headers:
+        api-type:
+          exact: yahoo
+    # - uri:
+    #     prefix: /getAllStocks
     route:
     - destination:
         host: yahoo
+        subset: v1
         port:
           number: 8080
       weight: 50
     - destination:
+        host: yahoo
+        subset: v2
+        port:
+          number: 8080
+      weight: 50
+  - match:
+    - headers:
+        api-type:
+          exact: google
+    # - uri:
+    #     prefix: /getAllStocks
+    route:
+    - destination:
         host: google
         port:
           number: 8081
-      weight: 50
+---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: google-service
+# spec:
+#   hosts:
+#   - "*"
+#   gateways:
+#   - stock-gateway
+#   http:
+#   - match:
+#     - headers:
+#         api-type:
+#           exact: yahoo
+#     route:
+#     - destination:
+#         host: google
+#         subset: v1
+#         port:
+#           number: 8081
+# ---
+

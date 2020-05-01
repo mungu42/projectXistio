@@ -57,7 +57,7 @@ kind: Service
 metadata:
   name: google
   labels:
-    app: ratings
+    app: google
     service: google
 spec:
   ports:
@@ -150,3 +150,55 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8082
+
+---
+###############################################
+# Yahoo service
+###############################################
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: yahoo
+#   labels:
+#     app: yahoo
+#     service: yahoo
+# spec:
+#   ports:
+#   - port: 8080
+#     name: http
+#   selector:
+#     app: yahoo
+# ---
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: yahoo-api
+#   labels:
+#     account: yahoo
+# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yahoo-v2
+  labels:
+    app: yahoo
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yahoo
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: yahoo
+        version: v2
+    spec:
+      serviceAccountName: yahoo-api
+      containers:
+      - name: yahoo
+        image: docker.io/mungu42/yahoo
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080

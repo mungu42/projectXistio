@@ -1,0 +1,41 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: stock-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: stockserver
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - stock-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /getAllStocks
+    route:
+    - destination:
+        host: yahoo
+        subset: v1
+        port:
+          number: 8080
+      weight: 50
+    - destination:
+        host: yahoo
+        subset: v2
+        port:
+          number: 8080
+      weight: 50
